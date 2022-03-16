@@ -1,0 +1,44 @@
+// Czujnik na transporterze rolkowym. Czujnik świeci (zapala się i wysyła sygnał wysoki) tak długo,
+// ile czasu paczka przejeżdża po taśmie na wysokości czujnika. 
+// Po wjeździe na taśmę i podczas przejazdu paczki występuje nieregularne odbicie się światła laserowego z czujnika od paczki i spadek (wyłączenie) sygnału wysokiego z czujnika,
+// generując mryganie sygnału pozytywnego (zadziałania/wysokiego) z czujnika świetlnego.
+// Sterownik PLC S7-300
+
+FC1 kontrola wejsc
+Network 59: Odwrócenie sygnału wyjściowego (PNP/NPN) czujnika
+      AN    M    1.0 		//Znacznik dla I46.0
+      =     Q    1.0 		//wyjście sygnałowe
+
+Network 60: Blokada mrugniec czujnika I46.0
+Dodana zwłoka czasowa podtrzymujaca zadziałanie (sygnał wysoki) z czujnika I46.0
+      O(    
+      A     I    1.0		//sygnał z czujnika
+      AN    M    1.1		//Pomocnicza do niwelacji drgan I46.0
+      FP    M    1.3		//Wykrycie wjazdu worka w zakres czujnika (krawędź wzrastająca)
+      AN    T    1		//Extended Pulse S5 Timer. Czasówka z natychmiastowym załączaniem na długość ustawionego czasu. 
+				//Timer uzyty do niwelacji drgan czujnika.
+      L     S5T#670MS		//0.65s podtrzymania i czasu zadziałania
+      SE    T    1		//Timer uzyty do niwelacji drgan czujnika
+      NOP   0			//NOP 0  (Instruction NOP with address "0") executes no function and does not affect the status bits. The instruction code contains a bit pattern with 16 zeros. The instruction is of interest only to the programming device (PG) when a program is displayed.
+      NOP   0
+      NOP   0
+      A     T    1
+      )     
+      O     
+      A     I    1.0
+      AN    M    1.1		//Pomocnicza do niwelacji drgan I46.0
+      =     M    1.0		//Znacznik dla I46.0
+
+Network 61: Blokada mrugniec czujnika I46.0
+dodana zwłoka czasowa podtrzymujaca zgaszenie sygnalu z czujnika I46.0
+
+      A     M    1.0		//Znacznik dla I46.0
+      FN    M    1.4		//Wykrycie zjazdu worka z czujnika (zbocze opadające)
+      AN    T    1		//Timer uzyty do niwelacji drgan czujnika
+      L     S5T#150MS		//0.15s podtrzymania i czasu zadziałania
+      SE    T    1
+      NOP   0
+      NOP   0
+      NOP   0
+      A     T    1
+      =     M    1.1		//Pomocnicza do niwelacji drgan I46.0
