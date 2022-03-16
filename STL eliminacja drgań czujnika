@@ -9,7 +9,7 @@ Network 59: Odwrócenie sygnału wyjściowego (PNP/NPN) czujnika
       AN    M    1.0 		//Znacznik dla I1.0
       =     Q    1.0 		//wyjście sygnałowe
 
-Network 60: Blokada mrugniec czujnika I46.0
+Network 60: Blokada mrugniec czujnika I1.0
 Dodana zwłoka czasowa podtrzymujaca zadziałanie (sygnał wysoki) z czujnika I1.0
       O(    
       A     I    1.0		//sygnał z czujnika
@@ -29,7 +29,7 @@ Dodana zwłoka czasowa podtrzymujaca zadziałanie (sygnał wysoki) z czujnika I1
       AN    M    1.1		//Pomocnicza do niwelacji drgan I1.0
       =     M    1.0		//Znacznik dla I1.0
 
-Network 61: Blokada mrugniec czujnika I46.0
+Network 61: Blokada mrugniec czujnika I1.0
 dodana zwłoka czasowa podtrzymujaca zgaszenie sygnalu z czujnika I1.0
 
       A     M    1.0		//Znacznik dla I1.0
