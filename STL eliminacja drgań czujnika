@@ -6,14 +6,14 @@
 
 FC1 kontrola wejsc
 Network 59: Odwrócenie sygnału wyjściowego (PNP/NPN) czujnika
-      AN    M    1.0 		//Znacznik dla I46.0
+      AN    M    1.0 		//Znacznik dla I1.0
       =     Q    1.0 		//wyjście sygnałowe
 
 Network 60: Blokada mrugniec czujnika I46.0
-Dodana zwłoka czasowa podtrzymujaca zadziałanie (sygnał wysoki) z czujnika I46.0
+Dodana zwłoka czasowa podtrzymujaca zadziałanie (sygnał wysoki) z czujnika I1.0
       O(    
       A     I    1.0		//sygnał z czujnika
-      AN    M    1.1		//Pomocnicza do niwelacji drgan I46.0
+      AN    M    1.1		//Pomocnicza do niwelacji drgan I1.0
       FP    M    1.3		//Wykrycie wjazdu worka w zakres czujnika (krawędź wzrastająca)
       AN    T    1		//Extended Pulse S5 Timer. Czasówka z natychmiastowym załączaniem na długość ustawionego czasu. 
 				//Timer uzyty do niwelacji drgan czujnika.
@@ -26,13 +26,13 @@ Dodana zwłoka czasowa podtrzymujaca zadziałanie (sygnał wysoki) z czujnika I4
       )     
       O     
       A     I    1.0
-      AN    M    1.1		//Pomocnicza do niwelacji drgan I46.0
-      =     M    1.0		//Znacznik dla I46.0
+      AN    M    1.1		//Pomocnicza do niwelacji drgan I1.0
+      =     M    1.0		//Znacznik dla I1.0
 
 Network 61: Blokada mrugniec czujnika I46.0
-dodana zwłoka czasowa podtrzymujaca zgaszenie sygnalu z czujnika I46.0
+dodana zwłoka czasowa podtrzymujaca zgaszenie sygnalu z czujnika I1.0
 
-      A     M    1.0		//Znacznik dla I46.0
+      A     M    1.0		//Znacznik dla I1.0
       FN    M    1.4		//Wykrycie zjazdu worka z czujnika (zbocze opadające)
       AN    T    1		//Timer uzyty do niwelacji drgan czujnika
       L     S5T#150MS		//0.15s podtrzymania i czasu zadziałania
@@ -41,4 +41,4 @@ dodana zwłoka czasowa podtrzymujaca zgaszenie sygnalu z czujnika I46.0
       NOP   0
       NOP   0
       A     T    1
-      =     M    1.1		//Pomocnicza do niwelacji drgan I46.0
+      =     M    1.1		//Pomocnicza do niwelacji drgan I1.0
